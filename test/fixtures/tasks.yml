@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project: one
+  name: MyString
+  urgency: 1
+  importance: 1
+  easy_startable: false
+
+two:
+  project: two
+  name: MyString
+  urgency: 1
+  importance: 1
+  easy_startable: false
