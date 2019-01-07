@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      post '/login', to: "sessions#create"
       resources :accounts, only: [:create, :delete, :update]
       resources :users, except: [:edit, :new]
       resources :projects, except: [:edit, :new] do
