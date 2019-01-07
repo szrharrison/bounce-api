@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: Bounce-Api_production
-  username: Bounce-Api
-  password: <%= ENV['BOUNCE-API_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
