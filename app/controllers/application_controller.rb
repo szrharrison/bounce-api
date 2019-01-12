@@ -12,6 +12,7 @@ class ApplicationController < ActionController::API
         @current_account ||= account
       end
     end
+    @current_account
   end
 
   def authenticate
