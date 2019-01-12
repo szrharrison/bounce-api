@@ -1,4 +1,4 @@
-class ProjectsController < ApplicationController
+class Api::V1::ProjectsController < ApplicationController
   def create
     project = Project.new(project_params)
     project.save

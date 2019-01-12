@@ -1,4 +1,4 @@
-class AccountsController < ApplicationController
+class Api::V1::AccountsController < ApplicationController
   skip_before_action :authenticate, only: [:create]
 
   def create
