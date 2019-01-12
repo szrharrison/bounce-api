@@ -4,7 +4,7 @@ class Api::V1::SessionsController < ApplicationController
   def create
     account = Account.find_by(email: auth_params[:email].downcase)
 
-    if account.exists? && account.authenticate(auth_params[:password])
+    if !account.nil? && account.authenticate(auth_params[:password])
       jwt = Auth.issue({account: account.id})
       render json: {jwt: jwt}
     end
@@ -14,6 +14,7 @@ class Api::V1::SessionsController < ApplicationController
   private
 
     def auth_params
+      print(params)
       params.require(:auth).permit(:email, :password)
     end
 end
