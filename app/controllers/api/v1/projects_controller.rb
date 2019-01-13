@@ -24,7 +24,7 @@ class Api::V1::ProjectsController < ApplicationController
 
   private
 
-  def project_params
-    params.require(:project).permit(:user_id, :urgency, :importance, :name, :due_date)
-  end
+    def project_params
+      params.require(:project).permit(:user_id, :urgency, :importance, :name, :due_date)
+    end
 end
