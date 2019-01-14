@@ -1,21 +1,28 @@
 class Api::V1::UsersController < ApplicationController
-  skip_before_action :authenticate, only: [:create]
-
   def create
-    User.create(params)
+    user = User.create(user_params)
+    render json: {user: user}
   end
 
   def update
-    user = User.find(@current_account.user.id)
-    user.update(params)
+    user = User.find(params.require(:id))
+    user.update(user_params)
+    render json: {user: user}
   end
 
   def show
-    User.find(@current_account.user.id)
+    user = User.find(params.require(:id))
+    render json: {user: user}
   end
 
   def delete
-    user = User.find(@current_account.user.id)
+    user = User.find(params.require(:id))
     user.destroy
   end
+
+  private
+
+    def user_params
+      params.require(:user).permit(:first_name, :last_name)
+    end
 end

@@ -1,30 +1,39 @@
 class Api::V1::ProjectsController < ApplicationController
   def create
-    project = Project.new(project_params)
-    project.save
+    project = Project.create(*project_params, user: @current_account.user)
+    render json: {project: project}
   end
 
   def update
-    project = Project.find(params[:id])
-    project.update(project_params)
+    project = Project.find(params.require(:id))
+    if project.user.id == @current_account.user.id
+      project.update(project_params)
+      render json: {project: project}
+    end
   end
 
   def index
-    Project.find_by(user_id: project_params[:user_id])
+    projects = Project.find_by(user_id: @current_account.user.id)
+    render json: {projects: projects}
   end
 
   def show
-    Project.find(params[:id])
+    project = Project.find(params.require(:id))
+    if project.user.id == @current_account.user.id
+      render json: {project: project}
+    end
   end
 
   def delete
-    project = Project.find(params[:id])
-    project.destroy
+    project = Project.find(params.require(:id))
+    if project.user.id == @current_account.user.id
+      project.destroy
+    end
   end
 
   private
 
     def project_params
-      params.require(:project).permit(:user_id, :urgency, :importance, :name, :due_date)
+      params.require(:project).permit(:id, :user_id, :urgency, :importance, :name, :due_date)
     end
 end
