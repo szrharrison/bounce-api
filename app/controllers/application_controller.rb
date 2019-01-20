@@ -17,7 +17,7 @@ class ApplicationController < ActionController::API
 
   def authenticate
     unless logged_in?
-      render json: {error: "unauthorized"}, status: 401
+      head :forbidden
     end
   end
 

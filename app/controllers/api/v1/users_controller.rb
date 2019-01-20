@@ -11,7 +11,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    user = User.find(params.require(:id))
+    user = User.find(@current_account.user.id)
     render json: {user: user}
   end
 

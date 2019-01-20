@@ -7,6 +7,8 @@ class Api::V1::SessionsController < ApplicationController
     if !account.nil? && account.authenticate(auth_params[:password])
       jwt = Auth.issue({account: account.id})
       render json: {jwt: jwt}
+    else
+      head :forbidden
     end
 
   end
